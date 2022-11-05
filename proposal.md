@@ -21,3 +21,44 @@ For the shortest path between multiple airports, the function will take a vector
 
 ## Timeline
 
+11/06-11/12:
+
+     - Data acquisition
+     
+     - Data processing
+     
+     - Data cleaning
+     
+     - Data reading
+     
+     - Create class structure
+     
+     - Complete constructor, copy constructor, destructor
+     
+11/13 - 11/19:
+
+    - Complete traversal algorithm
+    
+    - Develop test cases for constructor, copy constructor and traversal algorithm
+    
+    - Preapre for mid-project check-in
+    
+11/20 - 11/27:
+
+    - Complete A* search algorithm 
+    
+    - Develop test cases for A* search algorithm
+    
+11/28 - 12/08:
+
+    - Complete Kruskal's algorithm
+    
+    - Develop test cases for Kruskal's algorithm
+    
+    - Debug code and ensure all test cases are being passed
+    
+    - Make code cleaner
+    
+    - Prepare final project deliverables
+    
+    - Submit project
