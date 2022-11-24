@@ -1,13 +1,16 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-class FileData {
-    readAirports(const string& airportFile);
-    readRoutes(const string& routeFile);
+class FileData
+{
+    void readAirports(const string &airportFile);
+    void readRoutes(const string &routeFile);
 
-    vector<Airport*> airports;
-    vector<Route*> routes;
+    // need to get airport based on the 3-letter ID
+    unordered_map<string, Airport *> airports;
+    vector<Route *> routes;
 }
