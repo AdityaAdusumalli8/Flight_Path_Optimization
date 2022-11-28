@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -12,8 +14,8 @@ class Airport {// Airport class
         void setLongitude(double new_long);
         void setLatitude(double new_lat);
 
-        bool operator==(const Route &other);
+        // bool operator==(const Route &other);
 
         pair<double,double> coordinates; //first is latitdude and second is longitude
         string airport_ID;
-}
+};

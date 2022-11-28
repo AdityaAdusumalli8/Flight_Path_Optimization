@@ -19,12 +19,12 @@ Route:: ~Route() {
   delete _destAirport; 
 } 
 
-bool Route::operator==(const Route& other) const {
-    return (_srcAirport == other._srcAirport && _destAirport == other._destAirport;) ;
-}
+// bool Route::operator==(const Route& other) const {
+//     return (_srcAirport == other._srcAirport && _destAirport == other._destAirport;) ;
+// }
 
 //calculates distance using formula for distance between two points 
-double calculateDist(Airport* src, Airport* dest){
+double Route::calculateDist(Airport* src, Airport* dest){
     double x_dist = dest->coordinates.first - src->coordinates.first;
     double y_dist = dest->coordinates.second - src->coordinates.second;
     x_dist *= x_dist;

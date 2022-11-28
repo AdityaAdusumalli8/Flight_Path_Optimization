@@ -1,6 +1,4 @@
 #include "filereader.h"
-#include "airport.h"
-#include "routes.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -9,6 +7,8 @@
 #include <unordered_set>
 
 using namespace std;
+
+FileData::FileData() {}
 
 void FileData::readAirports(const string &airportFile)
 {
