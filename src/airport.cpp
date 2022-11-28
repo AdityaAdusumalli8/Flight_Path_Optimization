@@ -32,3 +32,15 @@ void Airport::setLatitude(double new_lat) {
     //if(new_lat==NULL) return;
     coordinates.first = new_lat;
 }
+
+string Airport::getAirportID() const {
+    return airport_ID;
+}
+
+double Airport::getLongitude() const {
+    return coordinates.second;
+}
+
+double Airport::getLatitude() const {
+    return coordinates.first;
+}

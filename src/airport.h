@@ -14,6 +14,11 @@ class Airport {// Airport class
         void setLongitude(double new_long);
         void setLatitude(double new_lat);
 
+        //getter functions
+        string getAirportID() const;
+        double getLongitude() const;
+        double getLatitude() const;
+
         // bool operator==(const Route &other);
 
         pair<double,double> coordinates; //first is latitdude and second is longitude

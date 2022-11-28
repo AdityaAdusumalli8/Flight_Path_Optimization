@@ -14,13 +14,13 @@ public:
     Graph();
     ~Graph();
 
-   void addEdge(int v, int w);
-   vector<Node *> dfs(Node *node);
+//    void addEdge(int v, int w);
+//    vector<Node *> dfs(Node *node);
 
 
 
 private:
-    list <int> *adj;
-    int V;
+    // list <int> *adj;
+    // int V;
     // map<string, bool> visited;
 };
