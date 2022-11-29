@@ -1,6 +1,7 @@
 #include "../src/graph.h"
 #include "../src/airport.h"
 #include "../src/filereader.h"
+#include <catch2/catch_test_macros.hpp>
 #include <vector>
 #include <string>
 
@@ -47,19 +48,19 @@
 //     REQUIRE(distSquared == 1207.99)
 // }
 
-// TEST_CASE("TEST_CSV_Parse_Small") {
-//     FileData filedata = FileData();
-//     filedata.readAirports("../src/airport.csv");
-//     filedata.readRoutes("../src/small_sample.csv");
+TEST_CASE("TEST_CSV_Parse_Small") {
+    FileData filedata = FileData();
+    filedata.readAirports("../src/airport.csv");
+    filedata.readRoutes("../src/small_sample.csv");
     
-//     REQUIRE(filedata.routes.size() == 6);
-// }
+    REQUIRE(filedata.routes.size() == 6);
+}
 
-// TEST_CASE("TEST_CSV_Parse_Big") {
-//     FileData filedata = FileData();
-//     filedata.readAirports("../src/airport.csv");
-//     filedata.readRoutes("../src/routes.csv");
+TEST_CASE("TEST_CSV_Parse_Big") {
+    FileData filedata = FileData();
+    filedata.readAirports("../src/airport.csv");
+    filedata.readRoutes("../src/routes.csv");
     
-//     REQUIRE(filedata.routes.size() == 66607);
-//     REQUIRE(filedata.airports.size() == 6055);
-// }
+    REQUIRE(filedata.routes.size() == 66607);
+    REQUIRE(filedata.airports.size() == 6055);
+}

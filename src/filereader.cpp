@@ -7,7 +7,6 @@
 #include <iostream>
 
 using namespace std;
-
 FileData::FileData() {}
 
 void FileData::readAirports(const string &airportFile)
@@ -40,7 +39,6 @@ void FileData::readAirports(const string &airportFile)
                 Airport *temp = new Airport(row[4], stod(row[6]), stod(row[7]));
                 //add to the hashmap with id as key and airport object as value
                 airports[row[4]] = temp;
-                throw ("null data");
             }
             catch(...){
                 //some of the coordinate data is null so when converting to double an error is thrown
