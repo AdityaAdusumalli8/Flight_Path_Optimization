@@ -26,27 +26,28 @@
 // }
 
 
-// TEST_CASE("Check Aiport Class","[weight=1]"){
-//     FileData filedata = FileData();
-//     filedata.readAirports("../src/airport.csv");
-//     REQUIRE(filedata.airports[0]->getAirportID()== "GKA");
-// }
+TEST_CASE("Check Aiport Class","[weight=1]"){
+    FileData filedata = FileData();
+    filedata.readAirports("../src/airport.csv");
+    REQUIRE(filedata.airports[0]->getAirportID()== "GKA");
+}
 
-// TEST_CASE("Check Route Class","[weight=1]"){
-//     FileData filedata = FileData();
-//     filedata.readAirports("../src/airport.csv");
-//     filedata.readRoutes("../src/routes.csv");
-//     REQUIRE(filedata.routes[6]->_srcAirport->getAirportID() == "DME" );
-//     REQUIRE(filedata.routes[6]->_destAirport->getAirportID() == "NBC" );
-// }
+TEST_CASE("Check Route Class","[weight=1]"){
+    FileData filedata = FileData();
+    filedata.readAirports("../src/airport.csv");
+    filedata.readRoutes("../src/routes.csv");
+    REQUIRE(filedata.routes[6]->_srcAirport->getAirportID() == "DME" );
+    REQUIRE(filedata.routes[6]->_destAirport->getAirportID() == "NBC" );
+}
 
-// TEST_CASE("Check Distance Function ","[weight=1]"){
-//     Airport* SFO = new Airport(SFO, 37.615223, -122.389977);
-//     Airport* OHR = new Airport(OHR, 41.9803, -87.9090);
-//     Route* testRoute = new Route(SFO, OHR);
-//     distSquared = testRoute->calculateDist(SFO, OHR);
-//     REQUIRE(distSquared == 1207.99)
-// }
+TEST_CASE("Check Distance Function ","[weight=1]"){
+    Airport* SFO = new Airport("SFO", 37.615223, -122.389977);
+    Airport* OHR = new Airport("OHR", 41.9803, -87.9090);
+    Route* testRoute = new Route(SFO, OHR);
+    auto distSquared = testRoute->calculateDist(SFO, OHR);
+
+    REQUIRE(distSquared == 1207.9916720905);
+}
 
 TEST_CASE("TEST_CSV_Parse_Small") {
     FileData filedata = FileData();
