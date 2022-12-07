@@ -29,7 +29,8 @@
 TEST_CASE("Check Aiport Class","[weight=1]"){
     FileData filedata = FileData();
     filedata.readAirports("../src/airport.csv");
-    REQUIRE(filedata.airports[0]->getAirportID()== "GKA");
+    string id = filedata.airports["GKA"]->getAirportID();
+    REQUIRE(id == "GKA");
 }
 
 TEST_CASE("Check Route Class","[weight=1]"){
@@ -52,7 +53,7 @@ TEST_CASE("Check Distance Function ","[weight=1]"){
 TEST_CASE("TEST_CSV_Parse_Small") {
     FileData filedata = FileData();
     filedata.readAirports("../src/airport.csv");
-    filedata.readRoutes("../src/small_sample.csv");
+    filedata.readRoutes("../src/routes_small.csv");
     
     REQUIRE(filedata.routes.size() == 6);
 }

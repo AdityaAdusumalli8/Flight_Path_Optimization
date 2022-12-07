@@ -6,16 +6,34 @@
 #include <stack>
 #include <unordered_map>
 
-
 using namespace std;
 
-Graph::Graph()
-{
-    
-}
+typedef vector<vector<int>> V2D; 
 
 Graph::Graph(const string &airportDataSet, const string &routesDataSet) {
+    FileData f = FileData();
+    f.readAirports(airportDataSet);
+    f.readRoutes(routesDataSet);
+    int i = 0;
+    vector<int> v;
+    for (unordered_map<string,Airport*>::iterator iter = f.airports.begin(); iter != f.airports.end(); ++iter){
+        string k = iter->first;
+        airport_idx[k] = i;
+        v.push_back(0);
+        i+=1;
+    }
+    for(int j=0; j<i; j++){
+        graph.push_back(v);
+    }
 
+    for(unsigned i=0; i<f.routes.size(); i++){
+        string srcID = f.routes[i]->_srcAirport->airport_ID;
+        string destID = f.routes[i]->_destAirport->airport_ID;
+        int src_idx = airport_idx[srcID];
+        int dest_idx = airport_idx[destID];
+        graph[src_idx][dest_idx] = f.routes[i]->_dist;
+        // cout<< src_idx << "," << dest_idx << ":" << graph[src_idx][dest_idx] << endl;
+    }
 }
 
 
@@ -24,6 +42,9 @@ Graph::~Graph()
     //dtor
 }
 
+// void dijkstra(int graph[x][y], Airport *src){
+
+// }
 // void Graph::addEdge(int v, int w)
 // {
 //     adj[v].push_back(w); // Add w to v’s list.
@@ -66,6 +87,7 @@ Graph::~Graph()
 //         }
 //     }
 // }
+
 // // A* (pronounced "A-star") is a graph traversal and path search algorithm, which is used in many fields of computer science due to its completeness, optimality, and optimal efficiency.[1] One major practical drawback is its {\displaystyle O(b^{d})}O(b^d) space complexity, as it stores all generated nodes in memory. Thus, in practical travel-routing systems, it is generally outperformed by algorithms which can pre-process the graph to attain better performance,[2] as well as memory-bounded approaches; however, A* is still the best solution in many cases.[3]
 // vector<string> Graph::Asearch(string origin, string dest) {
 //     Node* start = new Node(origin);

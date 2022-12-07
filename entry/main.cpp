@@ -1,10 +1,22 @@
 #include "filereader.h"
-#include "filereader.cpp"
+#include "graph.h"
 #include <iostream>
 using namespace std;
 
 int main()
 {
+    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+
+    cout<< g.graph[3387][888] << endl;
+    cout<< g.graph[890][888] << endl;
+
+    // for(unsigned i=0; i<g.graph.size(); i++){
+    //     for(unsigned j=0; j<g.graph[i].size(); j++){
+    //         cout<< g.graph[i][j] << ",";
+    //     }
+    //     cout<< "" << endl;
+    // }
+
     // FileData filedata = FileData();
     // filedata.readAirports("../src/airport.csv");
     // filedata.readRoutes("../src/routes.csv");
