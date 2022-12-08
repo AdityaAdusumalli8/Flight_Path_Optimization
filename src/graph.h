@@ -15,11 +15,9 @@ class Graph
 public:
     Graph(const string &airportDataSet, const string &routesDataSet);
     ~Graph();
-    // void addEdge(Airport* src, Airport* dest);
-    // void dijkstra(int graph[x][y]);
 
-    //    void addEdge(int v, int w);
-    //    vector<Node *> dfs(Node *node);
+    bool BFS(string src, string dest);
+    // void dijkstra(int graph[x][y]);
 
     //adj matrix for all airports
     V2D graph;

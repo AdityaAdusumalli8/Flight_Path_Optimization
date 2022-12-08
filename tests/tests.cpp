@@ -47,7 +47,7 @@ TEST_CASE("Check Distance Function ","[weight=1]"){
     Route* testRoute = new Route(SFO, OHR);
     auto distSquared = testRoute->calculateDist(SFO, OHR);
 
-    REQUIRE(distSquared == 1207.9916720905);
+    REQUIRE(int(distSquared) == int(1207.9916720905));
 }
 
 TEST_CASE("TEST_CSV_Parse_Small") {
@@ -65,4 +65,18 @@ TEST_CASE("TEST_CSV_Parse_Big") {
     
     REQUIRE(filedata.routes.size() == 66607);
     REQUIRE(filedata.airports.size() == 6055);
+}
+
+TEST_CASE("Check BFS Easy") {
+    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+    bool t = g.BFS("LED", "KZN");
+
+    REQUIRE(t == true);
+}
+
+TEST_CASE("Check BFS Hard") {
+    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+    bool t = g.BFS("AER", "NBC");
+    
+    REQUIRE(t == true);
 }

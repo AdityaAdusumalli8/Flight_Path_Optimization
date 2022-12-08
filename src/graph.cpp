@@ -42,13 +42,31 @@ Graph::~Graph()
     //dtor
 }
 
-// void dijkstra(int graph[x][y], Airport *src){
+//runs bfs to check if a path exists between 2 airports
+bool Graph::BFS(string src, string dest){
+    int start = airport_idx[src];
+    vector<bool> visited(graph.size(), false);
+    queue<int> q;
+    q.push(start);
 
-// }
-// void Graph::addEdge(int v, int w)
-// {
-//     adj[v].push_back(w); // Add w to v’s list.
-// }
+    visited[start] = true;
+
+    int vis;
+    while(!q.empty()){
+        vis = q.front();
+        q.pop();
+        for(unsigned i = 0; i < graph[vis].size(); i++){
+            if(graph[vis][i] != 0 && (!visited[i])){
+                q.push(i);
+                visited[i] = true;
+                if(int(i)==airport_idx[dest]) return true;
+            }
+        }
+    }
+    return false;
+}
+
+// void dijkstra(int graph[x][y], Airport *src){
 
 // void Graph::BFS(int s)
 // {

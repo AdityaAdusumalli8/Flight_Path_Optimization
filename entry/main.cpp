@@ -7,6 +7,9 @@ int main()
 {
     Graph g = Graph("../src/airport.csv", "../src/routes.csv");
 
+    bool t = g.BFS("AER", "NBC");
+    cout<< t << endl;
+
     cout<< g.graph[3387][888] << endl;
     cout<< g.graph[890][888] << endl;
 
