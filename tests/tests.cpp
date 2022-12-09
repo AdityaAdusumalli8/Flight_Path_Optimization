@@ -7,15 +7,15 @@
 
 TEST_CASE("Check Aiport Class","[weight=1]"){
     FileData filedata = FileData();
-    filedata.readAirports("../src/airport.csv");
+    filedata.readAirports("../tests/airport.csv");
     string id = filedata.airports["GKA"]->getAirportID();
     REQUIRE(id == "GKA");
 }
 
 TEST_CASE("Check Route Class","[weight=1]"){
     FileData filedata = FileData();
-    filedata.readAirports("../src/airport.csv");
-    filedata.readRoutes("../src/routes.csv");
+    filedata.readAirports("../tests/airport.csv");
+    filedata.readRoutes("../tests/routes.csv");
     REQUIRE(filedata.routes[6]->_srcAirport->getAirportID() == "DME" );
     REQUIRE(filedata.routes[6]->_destAirport->getAirportID() == "NBC" );
 }
@@ -31,31 +31,38 @@ TEST_CASE("Check Distance Function ","[weight=1]"){
 
 TEST_CASE("TEST_CSV_Parse_Small") {
     FileData filedata = FileData();
-    filedata.readAirports("../src/airport.csv");
-    filedata.readRoutes("../src/routes_small.csv");
+    filedata.readAirports("../tests/airport.csv");
+    filedata.readRoutes("../tests/routes_small.csv");
     
-    REQUIRE(filedata.routes.size() == 6);
+    REQUIRE(filedata.routes.size() == 20);
 }
 
 TEST_CASE("TEST_CSV_Parse_Big") {
     FileData filedata = FileData();
-    filedata.readAirports("../src/airport.csv");
-    filedata.readRoutes("../src/routes.csv");
+    filedata.readAirports("../tests/airport.csv");
+    filedata.readRoutes("../tests/routes.csv");
     
     REQUIRE(filedata.routes.size() == 66607);
     REQUIRE(filedata.airports.size() == 6055);
 }
 
 TEST_CASE("Check BFS Easy") {
-    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+    Graph g = Graph("../tests/airport.csv", "../tests/routes.csv");
     bool t = g.BFS("LED", "KZN");
 
     REQUIRE(t == true);
 }
 
-TEST_CASE("Check BFS Hard") {
-    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+TEST_CASE("Check BFS Medium") {
+    Graph g = Graph("../tests/airport.csv", "../tests/routes.csv");
     bool t = g.BFS("AER", "NBC");
     
     REQUIRE(t == true);
+}
+
+TEST_CASE("Check BFS Hard") {
+    Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
+    bool t = g.BFS("AER", "GYD");
+    
+    REQUIRE(t == false);
 }

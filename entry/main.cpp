@@ -5,13 +5,13 @@ using namespace std;
 
 int main()
 {
-    Graph g = Graph("../src/airport.csv", "../src/routes.csv");
+    Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
 
-    bool t = g.BFS("AER", "NBC");
+    bool t = g.BFS("AER", "GYD");
     cout<< t << endl;
 
-    cout<< g.graph[3387][888] << endl;
-    cout<< g.graph[890][888] << endl;
+    // cout<< g.graph[3387][888] << endl;
+    // cout<< g.graph[890][888] << endl;
 
     // for(unsigned i=0; i<g.graph.size(); i++){
     //     for(unsigned j=0; j<g.graph[i].size(); j++){

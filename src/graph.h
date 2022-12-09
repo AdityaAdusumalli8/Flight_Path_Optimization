@@ -17,8 +17,8 @@ public:
     ~Graph();
 
     bool BFS(string src, string dest);
-    vector<string> Kruskal();
-    vector<string> Asearch(string origin, string dest);
+    // vector<string> Kruskal();
+    // vector<string> Asearch(string origin, string dest);
 
     //adj matrix for all airports
     V2D graph;
