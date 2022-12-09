@@ -17,7 +17,8 @@ public:
     ~Graph();
 
     bool BFS(string src, string dest);
-    // void dijkstra(int graph[x][y]);
+    vector<string> Kruskal();
+    vector<string> Asearch(string origin, string dest);
 
     //adj matrix for all airports
     V2D graph;
@@ -25,5 +26,4 @@ public:
     //string "airportID" is KEY
     //index in adj matrix is VALUE
     unordered_map<string, int> airport_idx;
-
 };
