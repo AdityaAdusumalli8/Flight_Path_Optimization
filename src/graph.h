@@ -17,6 +17,9 @@ public:
     ~Graph();
 
     bool BFS(string src, string dest);
+
+    void printPath(int currentVertex, vector<int> parents);
+    void dijkstra(string src, string dest);
     // vector<string> Kruskal();
     // vector<string> Asearch(string origin, string dest);
 
@@ -26,4 +29,6 @@ public:
     //string "airportID" is KEY
     //index in adj matrix is VALUE
     unordered_map<string, int> airport_idx;
+    //reversed to get id from index
+    unordered_map<int, string> idx_airport;
 };

@@ -5,6 +5,7 @@
 #include <queue>
 #include <stack>
 #include <unordered_map>
+#include <limits.h>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ Graph::Graph(const string &airportDataSet, const string &routesDataSet) {
     for (unordered_map<string,Airport*>::iterator iter = f.airports.begin(); iter != f.airports.end(); ++iter){
         string k = iter->first;
         airport_idx[k] = i;
+        idx_airport[i] = k;
         v.push_back(0);
         i+=1;
     }
@@ -41,6 +43,7 @@ Graph::~Graph()
     //dtor
 }
 
+//checks whether a path exists from the scr to dest airport
 bool Graph::BFS(string src, string dest){
     int start = airport_idx[src];
     vector<bool> visited(graph.size(), false);
@@ -63,6 +66,76 @@ bool Graph::BFS(string src, string dest){
     }
     return false;
 }
+
+
+void Graph::printPath(int currentVertex, vector<int> parents){
+ 
+    // Base case : Source node has
+    // been processed
+    if (currentVertex == -1) {
+        return;
+    }
+    printPath(parents[currentVertex], parents);
+    cout << idx_airport[currentVertex] << "->";
+}
+
+
+//returns shortest path between two airports
+void Graph::dijkstra(string src, string dest){
+    //holds the shortest dist from src to each airport
+    vector dist(graph.size(), INT_MAX);
+
+    //if vertex is in the curr shortest path its associated index 
+    //is true in the path array
+    vector added(graph.size(), false);
+
+    vector<int> parents(graph.size());
+    parents[airport_idx[src]] = -1;
+
+    dist[airport_idx[src]] = 0;
+
+    cout<<"start"<<endl;
+    for (unsigned i = 0; i < graph.size()-1; i++) {
+ 
+        // Pick the minimum distance vertex
+        // from the set of vertices not yet
+        // processed. nearestNode is
+        // always equal to startNode in
+        // first iteration.
+        int nearestNode = -1;
+        int shortestDist = INT_MAX;
+        for (unsigned v = 0; v < graph.size(); v++) {
+            if (!added[v] && dist[v]<shortestDist) {
+                nearestNode = v;
+                shortestDist = dist[v];
+            }
+        }
+
+        if(nearestNode==-1) continue;
+        // Mark the picked vertex as
+        // processed
+        added[nearestNode] = true;
+ 
+        // Update dist value of the
+        // adjacent vertices of the
+        // picked vertex.
+        for (unsigned v = 0; v < graph.size(); v++) {
+            int edgeDistance = graph[nearestNode][v];
+ 
+            if (edgeDistance > 0 && ((shortestDist + edgeDistance)<dist[v])) {
+                parents[v] = nearestNode;
+                dist[v] = shortestDist + edgeDistance;
+            }
+        }
+    }
+
+    cout<<"end"<<endl;
+    
+    printPath(airport_idx[dest], parents);
+    cout<<endl;
+    cout<< dist[airport_idx[dest]]<< "," <<graph[airport_idx["AER"]][airport_idx["KZN"]] << endl;
+}
+
 
 // vector<string> Graph::Asearch(string origin, string dest) {
 //     Node* start = new Node(origin);
