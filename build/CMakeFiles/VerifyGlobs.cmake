@@ -8,7 +8,6 @@ set(OLD_GLOB
   "/workspaces/kaushikindukuri/Desktop/ECE/cs225/cs225-group225-Final-Project/src/airport.cpp"
   "/workspaces/kaushikindukuri/Desktop/ECE/cs225/cs225-group225-Final-Project/src/filereader.cpp"
   "/workspaces/kaushikindukuri/Desktop/ECE/cs225/cs225-group225-Final-Project/src/graph.cpp"
-  "/workspaces/kaushikindukuri/Desktop/ECE/cs225/cs225-group225-Final-Project/src/graphNode.cpp"
   "/workspaces/kaushikindukuri/Desktop/ECE/cs225/cs225-group225-Final-Project/src/routes.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

@@ -6,6 +6,8 @@
 #include <stack>
 #include <unordered_map>
 #include <limits.h>
+#include <bits/stdc++.h>
+#include <numeric>
 
 using namespace std;
 
@@ -81,7 +83,10 @@ void Graph::printPath(int currentVertex, vector<int> parents){
 
 
 //returns shortest path between two airports
-void Graph::dijkstra(string src, string dest){
+int Graph::dijkstra(string src, string dest){
+    if(airport_idx.find(src)==airport_idx.end() || airport_idx.find(dest)==airport_idx.end())
+        return -1;
+
     //holds the shortest dist from src to each airport
     vector dist(graph.size(), INT_MAX);
 
@@ -94,14 +99,8 @@ void Graph::dijkstra(string src, string dest){
 
     dist[airport_idx[src]] = 0;
 
-    cout<<"start"<<endl;
     for (unsigned i = 0; i < graph.size()-1; i++) {
  
-        // Pick the minimum distance vertex
-        // from the set of vertices not yet
-        // processed. nearestNode is
-        // always equal to startNode in
-        // first iteration.
         int nearestNode = -1;
         int shortestDist = INT_MAX;
         for (unsigned v = 0; v < graph.size(); v++) {
@@ -112,13 +111,8 @@ void Graph::dijkstra(string src, string dest){
         }
 
         if(nearestNode==-1) continue;
-        // Mark the picked vertex as
-        // processed
         added[nearestNode] = true;
  
-        // Update dist value of the
-        // adjacent vertices of the
-        // picked vertex.
         for (unsigned v = 0; v < graph.size(); v++) {
             int edgeDistance = graph[nearestNode][v];
  
@@ -129,89 +123,85 @@ void Graph::dijkstra(string src, string dest){
         }
     }
 
-    cout<<"end"<<endl;
-    
-    printPath(airport_idx[dest], parents);
-    cout<<endl;
-    cout<< dist[airport_idx[dest]]<< "," <<graph[airport_idx["AER"]][airport_idx["KZN"]] << endl;
+    if(dist[airport_idx[dest]]==INT_MAX) cout<<"No Path Found"<<endl;
+    else{
+        printPath(airport_idx[dest], parents);
+        cout<<endl;
+    }
+    return dist[airport_idx[dest]];
 }
 
 
-// vector<string> Graph::Asearch(string origin, string dest) {
-//     Node* start = new Node(origin);
-//     Node* end = new Node(dest);
+//find number of edges given idx of vertex
+int Graph::sumList(V2D mtrx, int row){
+    int sum=0;
+    for(unsigned i=0; i<mtrx.size(); i++){
+        if(mtrx[row][i]!=0) sum+=1;
+    }
+    return sum;
+}
 
-//     // The set of nodes already evaluated
-//     vector<Node*> closedSet;
-//     unordered_map <Node*, int> distance;
-//     // The set of currently discovered nodes that are not evaluated yet.
-//     // Initially, only the start node is known.
-//     vector<Node*> openSet;
-//     openSet.push_back(start);
-//     // For each node, which node it can most efficiently be reached from.
-//     // If a node can be reached from many nodes, cameFrom will eventually contain the
-//     // most efficient previous step.
-//     unordered_map <Node*, Node*> cameFrom;
-//     // For each node, the cost of getting from the start node to that node.
-//     distance[start] = 0;
-//     // For each node, the total cost of getting from the start node to the goal
-//     // by passing by that node. That value is partly known, partly heuristic.
-//     unordered_map <Node*, int> fScore;
-//     // For the first node, that value is completely heuristic.
-//     fScore[start] = heuristic_cost_estimate(start, end);
 
-//     while (!openSet.empty()) {
-//         Node* current = lowest_fScore(openSet, fScore);
-//         if (current == end) {
-//             return reconstruct_path(cameFrom, current);
-//         }
-//         openSet.erase(remove(openSet.begin(), openSet.end(), current), openSet.end());
-//         closedSet.push_back(current);
-//         vector<Node*> neighbors = get_neighbors(current);
-//         for (unsigned i = 0; i < neighbors.size(); i++) {
-//             Node* neighbor = neighbors[i];
-//             if (find(closedSet.begin(), closedSet.end(), neighbor) != closedSet.end()) {
-//                 continue;
-//             }
-//             int tentative_gScore = distance[current] + graph[airport_idx[current->airportID]][airport_idx[neighbor->airportID]];
-//             if (find(openSet.begin(), openSet.end(), neighbor) == openSet.end()) {
-//                 openSet.push_back(neighbor);
-//             } else if (tentative_gScore >= distance[neighbor]) {
-//                 continue;
-//             }
-//             cameFrom[neighbor] = current;
-//             distance[neighbor] = tentative_gScore;
-//             fScore[neighbor] = distance[neighbor] + heuristic_cost_estimate(neighbor, end);
-//         }
-//     }
-//     return vector<string>();
-// }
+void Graph::eulerian(int n)
+{
+    V2D mtrx = graph;
+    vector<int> numAdj, path;
+    stack<int> s;
+ 
+    for (int i = 0; i < n; i++){
+        numAdj.push_back(sumList(mtrx, i));
+    }
+    
+    int start, oddNum = 0;
+    for (int i = n - 1; i >= 0; i--){
+        switch(numAdj[i]%2){
+            case(1):
+                oddNum++;
+                start = i;
+            default:
+                continue;
+        }
+    }
 
-// vector<string> Graph::Kruskal() {
-//     vector<string> mst;
-//     vector<Edge> edges;
-//     for (unsigned i = 0; i < graph.size(); i++) {
-//         for (unsigned j = 0; j < graph[i].size(); j++) {
-//             if (graph[i][j] != 0) {
-//                 Edge e = Edge(i, j, graph[i][j]);
-//                 edges.push_back(e);
-//             }
-//         }
-//     }
-//     sort(edges.begin(), edges.end());
-//     DisjointSet ds = DisjointSet(graph.size());
-//     for (unsigned i = 0; i < edges.size(); i++) {
-//         int u = edges[i].src;
-//         int v = edges[i].dest;
-//         int set_u = ds.find(u);
-//         int set_v = ds.find(v);
-//         if (set_u != set_v) {
-//             mst.push_back(getKey(airport_idx, u));
-//             mst.push_back(getKey(airport_idx, v));
-//             ds.merge(set_u, set_v);
-//         }
-//     }
-//     return mst;
-// }
+    if (oddNum > 2){
+        cout << "no eulerian path" << endl;
+        return;
+    }
+
+    int current = start;
+    while (sumList(mtrx,current)!= 0 || !s.empty())
+    {
+
+        if (sumList(mtrx,current) == 0)
+        {
+            path.push_back(current);
+            current = s.top();
+            s.pop();
+        }
+        
+        else
+        {
+            int i = 0;
+            while(i<n){
+                if (mtrx[current][i] > 0){
+                    mtrx[i][current] = 0;
+                    mtrx[current][i] = 0;
+                    s.push(current);
+                    current = i;
+                    break;
+                }
+                i++;
+            }
+        }
+    }
+    // print the path
+    for (auto j : path){
+        cout << idx_airport[j] << " -> ";
+    } 
+    cout << idx_airport[current] << endl;
+}
+ 
+
+
 
 

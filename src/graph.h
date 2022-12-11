@@ -2,8 +2,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include <list>
-#include "graphNode.h"
+#include <list> 
 #include "filereader.h"
 
 using namespace std;
@@ -19,9 +18,10 @@ public:
     bool BFS(string src, string dest);
 
     void printPath(int currentVertex, vector<int> parents);
-    void dijkstra(string src, string dest);
-    // vector<string> Kruskal();
-    // vector<string> Asearch(string origin, string dest);
+    int dijkstra(string src, string dest);
+
+    int sumList(V2D graph, int row);
+    void eulerian(int n);
 
     //adj matrix for all airports
     V2D graph;

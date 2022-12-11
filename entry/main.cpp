@@ -8,7 +8,9 @@ int main()
     Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
 
     bool t = g.BFS("AER", "GYD");
-    g.dijkstra("KZN", "NBC");
+    cout<< g.dijkstra("AER", "KZN") << endl;
+
+    g.eulerian(g.graph.size());
     // cout<< t << endl;
 
     // cout<< g.graph[g.airport_idx["NUX"]][g.airport_idx["SVX"]] << endl;
