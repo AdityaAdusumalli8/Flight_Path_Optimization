@@ -21,7 +21,7 @@ public:
     int dijkstra(string src, string dest);
 
     int sumList(V2D graph, int row);
-    void eulerian(int n);
+    vector<string> eulerian(int n);
 
     //adj matrix for all airports
     V2D graph;

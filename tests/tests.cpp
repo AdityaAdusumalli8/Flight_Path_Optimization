@@ -26,7 +26,7 @@ TEST_CASE("Check Distance Function ","[weight=1]"){
     Route* testRoute = new Route(SFO, OHR);
     auto distSquared = testRoute->calculateDist(SFO, OHR);
 
-    REQUIRE(int(distSquared) == int(1207.9916720905));
+    REQUIRE(int(distSquared) == 3833);
 }
 
 TEST_CASE("TEST_CSV_Parse_Small") {
@@ -65,4 +65,43 @@ TEST_CASE("Check BFS Hard") {
     bool t = g.BFS("AER", "GYD");
     
     REQUIRE(t == false);
+}
+
+TEST_CASE("Check Dijkstras Easy") {
+    Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
+    int dist = g.dijkstra("GYD", "AER");
+    
+    REQUIRE(dist == -1);
+}
+
+TEST_CASE("Check Dijkstras Hard") {
+    Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
+    int dist = g.dijkstra("DME", "AER");
+    
+    REQUIRE(dist == 2674);
+}
+
+
+TEST_CASE("Check Eulerian Path Doesn't Exist") {
+    Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
+    vector<string> path = g.eulerian(g.graph.size());
+    
+    REQUIRE(path.size() == 0);
+}
+
+TEST_CASE("Check Eulerian Path Exists") {
+    Graph g = Graph("../tests/airports_eulerian.csv", "../tests/routes_eulerian.csv");
+    vector<string> path = g.eulerian(g.graph.size());
+    vector<string> check;
+    check.push_back("KZN");
+    check.push_back("AER");
+    check.push_back("ASF");
+    check.push_back("KZN");
+    check.push_back("CEK");
+    check.push_back("DME");
+    check.push_back("KZN");
+    check.push_back("EGO");
+    check.push_back("KGD");
+    
+    REQUIRE(path == check);
 }

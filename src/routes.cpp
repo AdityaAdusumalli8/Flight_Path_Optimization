@@ -1,4 +1,5 @@
 #include "routes.h"
+#include <cmath>
 
 using namespace std;
 
@@ -25,9 +26,29 @@ Route:: ~Route() {
 
 //calculates distance using formula for distance between two points 
 double Route::calculateDist(Airport* src, Airport* dest){
-    double x_dist = dest->coordinates.first - src->coordinates.first;
-    double y_dist = dest->coordinates.second - src->coordinates.second;
-    x_dist *= x_dist;
-    y_dist *= y_dist;
-    return x_dist + y_dist;
+  long double one_deg = (M_PI) / 180;
+  long double lat1 = src->coordinates.first;
+  long double long1 = src->coordinates.second;
+  long double lat2 = dest->coordinates.first;
+  long double long2 = dest->coordinates.second;
+
+  //convert to radians
+  lat1 = lat1 * one_deg;
+  long1 = long1 * one_deg;
+  lat2 = lat2 * one_deg;
+  long2 = long2 * one_deg;
+
+  //Haversine Formula
+  long double dlong = long2 - long1;
+  long double dlat = lat2 - lat1;
+  long double ans = pow(sin(dlat / 2), 2) +
+                          cos(lat1) * cos(lat2) *
+                          pow(sin(dlong / 2), 2);
+ 
+  ans = 2 * asin(sqrt(ans));
+ 
+  long double R = 6371;
+     
+  ans = ans * R;
+  return ans;
 }

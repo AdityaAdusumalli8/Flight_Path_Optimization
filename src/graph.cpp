@@ -47,6 +47,9 @@ Graph::~Graph()
 
 //checks whether a path exists from the scr to dest airport
 bool Graph::BFS(string src, string dest){
+    if(airport_idx.find(src)==airport_idx.end() || airport_idx.find(dest)==airport_idx.end())
+        return false;
+        
     int start = airport_idx[src];
     vector<bool> visited(graph.size(), false);
     queue<int> q;
@@ -123,7 +126,9 @@ int Graph::dijkstra(string src, string dest){
         }
     }
 
-    if(dist[airport_idx[dest]]==INT_MAX) cout<<"No Path Found"<<endl;
+    if(dist[airport_idx[dest]]==INT_MAX){
+        return -1;
+    } 
     else{
         printPath(airport_idx[dest], parents);
         cout<<endl;
@@ -142,10 +147,11 @@ int Graph::sumList(V2D mtrx, int row){
 }
 
 
-void Graph::eulerian(int n)
+vector<string> Graph::eulerian(int n)
 {
     V2D mtrx = graph;
-    vector<int> numAdj, path;
+    vector<int> numAdj;
+    vector<string> path;
     stack<int> s;
  
     for (int i = 0; i < n; i++){
@@ -164,8 +170,8 @@ void Graph::eulerian(int n)
     }
 
     if (oddNum > 2){
-        cout << "no eulerian path" << endl;
-        return;
+        vector<string> res;
+        return res;
     }
 
     int current = start;
@@ -174,7 +180,7 @@ void Graph::eulerian(int n)
 
         if (sumList(mtrx,current) == 0)
         {
-            path.push_back(current);
+            path.push_back(idx_airport[current]);
             current = s.top();
             s.pop();
         }
@@ -194,11 +200,9 @@ void Graph::eulerian(int n)
             }
         }
     }
-    // print the path
-    for (auto j : path){
-        cout << idx_airport[j] << " -> ";
-    } 
-    cout << idx_airport[current] << endl;
+
+    path.push_back(idx_airport[current]);
+    return path;
 }
  
 

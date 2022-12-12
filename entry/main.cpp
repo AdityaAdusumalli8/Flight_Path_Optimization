@@ -1,66 +1,51 @@
 #include "filereader.h"
 #include "graph.h"
 #include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
 int main()
 {
+    //Check BFS and dijkstras work
     Graph g = Graph("../tests/airports_small.csv", "../tests/routes_small.csv");
-
-    bool t = g.BFS("AER", "GYD");
-    cout<< g.dijkstra("AER", "KZN") << endl;
-
-    g.eulerian(g.graph.size());
-    // cout<< t << endl;
-
-    // cout<< g.graph[g.airport_idx["NUX"]][g.airport_idx["SVX"]] << endl;
-    // cout<< g.graph[890][888] << endl;
-
-    // for(unsigned i=0; i<g.graph.size(); i++){
-    //     for(unsigned j=0; j<g.graph[i].size(); j++){
-    //         cout<< g.graph[i][j] << ",";
-    //     }
-    //     cout<< "" << endl;
-    // }
-
-    // FileData filedata = FileData();
-    // filedata.readAirports("../src/airport.csv");
-    // filedata.readRoutes("../src/routes.csv");
-    
-    //check contents of routes data
-    // for (unsigned i = 0; i < filedata.routes.size(); i++){
-    //     cout << filedata.routes[i]->_dist << endl;
-    // }
-    
-    // //check contents of airport data
-    // for (auto const& vals: filedata.airports) {
-    //     cout << vals.first << endl;
-    // }
-
-    // //check size of filedata
-    // cout << filedata.routes.size() << endl;
-    // cout << filedata.airports.size() << endl;
+    cout<< g.graph[g.airport_idx["SFO"]][g.airport_idx["ORD"]] << endl;
 
 
-    // SMALL SAMPLE
+    string src;
+    string dest;
 
-    // FileData filedata = FileData();
-    // filedata.readAirports("../src/airport.csv");
-    // filedata.readRoutes("../src/small_sample.csv");
-    
-    // //check contents of filedata
-    // for (unsigned i = 0; i < filedata.routes.size(); i++){
-    //     cout << filedata.routes[i]->_dist << endl;
-    // }
-    
-    // check contents of filedata
-    // for (auto const& vals: filedata.airports) {
-    //     cout << vals.first << endl;
-    // }
+    cout << "Type the source airport id: ";
+    cin >> src;
+    cout << "Type the destination airport id: ";
+    cin >> dest;
+    if(g.BFS(src, dest)){
+        string check;
+        cout<<"We have verified a path exists with BFS" << endl;
+        cout<<"Would you like to find the shortest path y or n: ";
+        cin>> check;
+        if(check == "y"){
+            cout<< "The shortest path is ";
+            int dist = g.dijkstra(src, dest);
+            cout << "The distance is "<< dist << endl;
+        }
+        else if(check == "n"){
+            cout<<"Thank you for your time!" << endl; 
+        }
+    }
+    else{
+        cout<< "We have verified no path exists with BFS" << endl;
+    }
 
-    // //check size of filedata
-    // cout << filedata.routes.size() << endl;
-    // cout << filedata.airports.size() << endl;
-    
+
+    //Check eulerian pathfinder works
+    // Graph g = Graph("../tests/airports_eulerian.csv", "../tests/routes_eulerian.csv");
+    // vector<string> path = g.eulerian(g.graph.size());
+    // for (unsigned i=0; i<path.size(); i++){
+    //     cout << path[i] << " -> ";
+    // } 
+    // cout<<endl;
+
+
     return 0;
 } 
