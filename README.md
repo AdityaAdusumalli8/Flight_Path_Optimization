@@ -38,9 +38,9 @@ The remaining deliverables (project proposal, team contract, written report, pre
 # Running Instructions
 
 1) Clone repository to your local dekstop
-2) Open the folder in Visual Studio Code
-3) Open a new terminal within the VS Code window
-4) Navigate into the 'build' folder
-5) Once in the 'build' folder, run the following command: "cmake .." 
-6) From here, to run test cases type the following commond: "make tests"
-7) To execute test cases run: "./test"
+3) Open the folder in Visual Studio Code
+4) Open a new terminal within the VS Code window
+5) Navigate into the 'build' folder
+6) Once in the 'build' folder, run the following command: "cmake .." 
+7) From here, to run test cases type the following commond: "make tests"
+8) To execute test cases run: "./test"
