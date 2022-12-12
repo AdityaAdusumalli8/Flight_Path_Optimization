@@ -33,3 +33,14 @@ The data we use is stored in the form of csv files within the 'tests' folder.
 **Other Deliverables:**
 
 The remaining deliverables (project proposal, team contract, written report, presentation slides and submission video) can be found in the 'deliverables' folder.
+
+
+# Running Instructions
+
+1) Clone repository to your local dekstop
+2) Open the folder in Visual Studio Code
+3) Open a new terminal within the VS Code window
+4) Navigate into the 'build' folder
+5) Once in the 'build' folder, run the following command: "cmake .." 
+6) From here, to run test cases type the following commond: "make tests"
+7) To execute test cases run: "./test"
