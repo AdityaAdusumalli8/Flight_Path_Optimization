@@ -1,4 +1,4 @@
-**CS225 Final Project Written Report
+**CS225 Final Project Written Report**
 
 **The output and correctness of each algorithm:
 
