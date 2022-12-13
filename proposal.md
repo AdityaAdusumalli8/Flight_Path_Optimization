@@ -62,3 +62,19 @@ For the shortest path between multiple airports, the function will take a vector
     - Prepare final project deliverables
     
     - Submit project
+    
+## Updated Timeline
+
+Since we decided to switch our algorithms pretty last minute, here is a timeline of when our finalized algorithms were written and the timeline it followed:
+
+12/08 - 12/12
+     
+     - Complete Dijkstra's algorithm
+     
+     - Complete Eulerian Path Identification Algorithm
+     
+     - Write test cases for both algorithms
+     
+     - Finish write up, presentation and other final project deliverables
+     
+     - Fix Project Proposal
