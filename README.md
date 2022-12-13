@@ -42,8 +42,12 @@ The remaining deliverables (project proposal, team contract, written report, pre
 4) If there is already a build directory within the folder delete it
 6) Open a new terminal within the VS Code window
 7) run "mkdir build" in the terminal
-8) Once the build directory is created navigate into it
+8) Once the build directory is created navigate into it with "cd build"
 9) Once in the 'build' folder, run the following command: "cmake .." 
-10) After this runs, run "make"
-11) From here, to run test cases type the following commond: "make tests"
-12) To execute test cases run: "./test"
+10) Afterwards, run "make" to compile the code
+11) To execute test cases run: "./test"
+12) To test manually, run: "./main"
+13) You will be prompted to enter a source and destination airport id
+14) If a path exists, you will be prompted to find the shortest path with dijkstras
+15) Comment out the bfs and dijkstras section and uncommnt the eulerian path section
+16) Run "./main" to check eulerian now
