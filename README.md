@@ -55,5 +55,7 @@ The remaining deliverables (project proposal, team contract, written report, pre
 
 # Link to Presentation Slides + Video
 
-https://docs.google.com/presentation/d/1IXGVNO2ID_qt_u0cOyg3Br18dIjAiCwtW6Mc73xvi1M/edit?usp=sharing
+Slides: https://docs.google.com/presentation/d/1IXGVNO2ID_qt_u0cOyg3Br18dIjAiCwtW6Mc73xvi1M/edit?usp=sharing
+
+Video: https://www.youtube.com/watch?v=3ooKjO9kGso
 
