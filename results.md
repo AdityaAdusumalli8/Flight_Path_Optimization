@@ -1,23 +1,23 @@
 **CS225 Final Project Written Report**
 
-**The output and correctness of each algorithm:
+**The output and correctness of each algorithm:**
 
-**Traversal:
+**Traversal:**
 	For our traversal, we decided to use a BFS on our adjacency matrix to help achieve our project goals. This algorithm can be found in the graph.cpp file in the ‘src’ folder. To quickly refresh, BFS stands for breadth-first search and it is a traversal algorithm used to traverse through the nodes of a graph. In this traversal method, we begin our search at the root node and then traverse into the neighboring nodes on the same level before progressing onto the next. In this way, BFS is the opposite of DFS which traverses nodes in a depth-first manner. The reason why we chose to go with BFS instead of DFS is because BFS enables us to find the shortest path between two nodes which fits our project goals better. Our BFS algorithm primarily serves as a function we can use to verify if there is a path that exists between two airports. The function takes in two parameters, a source airport and a destination airport, and returns true if a route exists between the two and false otherwise. Since we are using an adjacency matrix, running this BFS traversal would result in a runtime of O(N^2) where N is the number of nodes in our graph.
 
 	To test this function we have a few test cases designed to assert whether or not there is a path that exists between two airports we hand-selected from the datasets. We hand-selected two pairs of airports in which a path exists between and one pair in which there is no path between. This way we could ensure that our function passes both cases.
  
-**Covered Method:
+**Covered Method:**
 	For our covered method, our group decided to use dijkstra's algorithm in order to find the shortest path of routes between two given airports. This algorithm can also be found in the graph.cpp file in the ‘src’ folder. This algorithm starts at the starting node and then visits the neighboring nodes. While visiting the neighbors, dijsktra’s algorithm calculates the distance to the neighbor by adding the weight of the edge between the starting node and the neighbor to the starting node's current distance. If this new distance is less than the current distance of the neighbor, it updates the neighbor's distance and adds the neighbor to a queue of nodes to be visited. The algorithm keeps visiting nodes and updating distances in this fashion until it reaches the destination node, at which time it has discovered the shortest path to get there. Overall, this algorithm has a worst case runtime of O(N^2) on our adjacency matrix where N is the number of nodes in our graph.
 
 	To test this function we have a couple of test cases designed to assert whether or not our algorithm correctly finds the shortest path between two airports. We check to see if dijkstra’s algorithm runs properly by observing the shortest distance value for the shortest path it calculates for the given inputs. Additionally, we test to see if dijkstra’s algorithm correctly identifies when there is no path between the given inputs.
 
-**Uncovered Method::
+**Uncovered Method:**
 	For our uncovered method, our group implemented an eulerian path identification algorithm to check for eulerian paths within our graph. A eulerian path can be defined as a path in a graph in which each node is visited exactly once. If our algorithm detects an eulerian path in our graph it outputs the path in the form of a vector populated with the eulerian path. If a path is not detected, the function will simply output an empty vector. The overall runtime for this algorithm is O(E) where E is the number of edges in the graph.
 
 	To test this function, we have two test cases designed to assert whether or not a eulerian path can be found in our graph. For one of our test cases, we had to hand-make a new dataset in which an eulerian path exists in order to make sure that our algorithm can detect an eulerian path. For the other, we used a dataset in which we were sure no eulerian path exists to make sure that our algorithm can detect when such a path does not exist as well. 
  
-**The answer to the leading question:
+**The answer to the leading question:**
 
 	To refresh, our leading question for this project was to find the shortest path between two given airports. To achieve this we utilized two datasets: one that contained a list of source and destination airports as well as their corresponding latitude and longitude coordinates and the other contained route information between airports. Using this data, we initialized a graph in the form of an adjacency matrix in which nodes were airports, edges were connecting routes, and the weight of the edges was the distance between the two airports. From here, we developed algorithms to help answer our leading question as well as go beyond it. 
 
