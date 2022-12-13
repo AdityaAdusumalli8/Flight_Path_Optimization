@@ -51,3 +51,9 @@ The remaining deliverables (project proposal, team contract, written report, pre
 14) If a path exists, you will be prompted to find the shortest path with dijkstras
 15) Comment out the bfs and dijkstras section and uncommnt the eulerian path section
 16) Run "./main" to check eulerian now
+
+
+# Link to Presentation Slides + Video
+
+https://docs.google.com/presentation/d/1IXGVNO2ID_qt_u0cOyg3Br18dIjAiCwtW6Mc73xvi1M/edit?usp=sharing
+
