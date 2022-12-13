@@ -32,7 +32,7 @@ The data we use is stored in the form of csv files within the 'tests' folder.
 
 **Other Deliverables:**
 
-The remaining deliverables (project proposal, team contract, written report, presentation slides and submission video) can be found in the 'deliverables' folder.
+The remaining deliverables (project proposal, team contract, written report, presentation slides and submission video) can be found in the general project directory.
 
 
 # Running Instructions
