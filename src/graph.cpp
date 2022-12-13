@@ -36,6 +36,7 @@ Graph::Graph(const string &airportDataSet, const string &routesDataSet) {
         int src_idx = airport_idx[srcID];
         int dest_idx = airport_idx[destID];
         graph[src_idx][dest_idx] = f.routes[i]->_dist;
+        graph[dest_idx][src_idx] = f.routes[i]->_dist;
     }
 }
 
@@ -47,24 +48,31 @@ Graph::~Graph()
 
 //checks whether a path exists from the scr to dest airport
 bool Graph::BFS(string src, string dest){
-    if(airport_idx.find(src)==airport_idx.end() || airport_idx.find(dest)==airport_idx.end())
+    //if any invalid airports return false
+    if(airport_idx.find(src)==airport_idx.end() || airport_idx.find(dest)==airport_idx.end()){
         return false;
-        
+    }
+
     int start = airport_idx[src];
     vector<bool> visited(graph.size(), false);
     queue<int> q;
+
+    //prep for first iteration
     q.push(start);
-
     visited[start] = true;
+    int cur;
 
-    int vis;
+    //if the queue is empty, we have visited all the airports
     while(!q.empty()){
-        vis = q.front();
+        //we look at the top element from the queue each iteration
+        cur = q.front();
         q.pop();
-        for(unsigned i = 0; i < graph[vis].size(); i++){
-            if(graph[vis][i] != 0 && (!visited[i])){
+        //add all neighboring, unvisited airports to queue
+        for(unsigned i = 0; i < graph[cur].size(); i++){
+            if(graph[cur][i] != 0 && (!visited[i])){
                 q.push(i);
                 visited[i] = true;
+                //if we have reached the destination airport return true
                 if(int(i)==airport_idx[dest]) return true;
             }
         }
@@ -75,8 +83,6 @@ bool Graph::BFS(string src, string dest){
 
 void Graph::printPath(int currentVertex, vector<int> parents){
  
-    // Base case : Source node has
-    // been processed
     if (currentVertex == -1) {
         return;
     }
@@ -95,41 +101,52 @@ int Graph::dijkstra(string src, string dest){
 
     //if vertex is in the curr shortest path its associated index 
     //is true in the path array
-    vector added(graph.size(), false);
+    vector path(graph.size(), false);
 
+    //each airport will have an int which represents its parent index, or the previous
+    //airport in the route
     vector<int> parents(graph.size());
     parents[airport_idx[src]] = -1;
 
+    //the distance from the source airport to itself is 0
     dist[airport_idx[src]] = 0;
 
+    //find the shortest distance of every node
     for (unsigned i = 0; i < graph.size()-1; i++) {
- 
-        int nearestNode = -1;
+        //process each node one at a time so pick the min
+        //distance airport from whichever airports havent
+        //been visited yet
+        int nearestNode = -1; 
         int shortestDist = INT_MAX;
         for (unsigned v = 0; v < graph.size(); v++) {
-            if (!added[v] && dist[v]<shortestDist) {
+            if (!path[v] && dist[v]< shortestDist) {
                 nearestNode = v;
                 shortestDist = dist[v];
             }
         }
 
         if(nearestNode==-1) continue;
-        added[nearestNode] = true;
+        //change the nearest airport to processed
+        path[nearestNode] = true;
  
+        //update the shortest distances for each of the adj nodes to nearestNode
         for (unsigned v = 0; v < graph.size(); v++) {
-            int edgeDistance = graph[nearestNode][v];
- 
-            if (edgeDistance > 0 && ((shortestDist + edgeDistance)<dist[v])) {
+            int edge_dist = graph[nearestNode][v];
+            //we do shortest dist + edge dist since nodes x->z may have dist 9
+            //however if x->y has shortest dist 2 and edge dist of y->z is 5, 7 < 9 so 
+            //the new shortest dist from x->z would be 7
+            if (edge_dist > 0 && ((shortestDist + edge_dist)<dist[v])) {
                 parents[v] = nearestNode;
-                dist[v] = shortestDist + edgeDistance;
+                dist[v] = shortestDist + edge_dist;
             }
         }
     }
 
+    //if the destination airport was never reached return -1
     if(dist[airport_idx[dest]]==INT_MAX){
         return -1;
     } 
-    else{
+    else{ //if it was print the path
         printPath(airport_idx[dest], parents);
         cout<<endl;
     }
@@ -154,10 +171,12 @@ vector<string> Graph::eulerian(int n)
     vector<string> path;
     stack<int> s;
  
+    //find number of edges for each node
     for (int i = 0; i < n; i++){
         numAdj.push_back(sumList(mtrx, i));
     }
     
+    //count how many nodes have odd number of edges
     int start, oddNum = 0;
     for (int i = n - 1; i >= 0; i--){
         switch(numAdj[i]%2){
@@ -169,26 +188,34 @@ vector<string> Graph::eulerian(int n)
         }
     }
 
+    //if there are more than 2 nodes with odd number of 
+    //edges, then a eulerian path cant be made
     if (oddNum > 2){
         vector<string> res;
         return res;
     }
 
+    //while the current node has at least one neighbor or the stack is not empty 
+    //discover the neighboring node and then the current node by backtracking
     int current = start;
     while (sumList(mtrx,current)!= 0 || !s.empty())
     {
-
+        //If the current node has no neighbors then add it to the 
+        //path and pop stack, set current to popped vertex.
         if (sumList(mtrx,current) == 0)
         {
             path.push_back(idx_airport[current]);
             current = s.top();
             s.pop();
-        }
-        
+        }  
+        //if there are neighbors
         else
         {
             int i = 0;
             while(i<n){
+                //add the current node to stack, 
+                //remove the edge between the current node and neighbor node 
+                //set current to the neighbor node.
                 if (mtrx[current][i] > 0){
                     mtrx[i][current] = 0;
                     mtrx[current][i] = 0;
@@ -201,6 +228,7 @@ vector<string> Graph::eulerian(int n)
         }
     }
 
+    //the node we end on won't be pushed in the loop so add it here
     path.push_back(idx_airport[current]);
     return path;
 }

@@ -34,7 +34,7 @@ TEST_CASE("TEST_CSV_Parse_Small") {
     filedata.readAirports("../tests/airport.csv");
     filedata.readRoutes("../tests/routes_small.csv");
     
-    REQUIRE(filedata.routes.size() == 20);
+    REQUIRE(filedata.routes.size() == 19);
 }
 
 TEST_CASE("TEST_CSV_Parse_Big") {
@@ -79,6 +79,13 @@ TEST_CASE("Check Dijkstras Hard") {
     int dist = g.dijkstra("DME", "AER");
     
     REQUIRE(dist == 2674);
+}
+
+TEST_CASE("Check Dijkstras on main dataset") {
+    Graph g = Graph("../tests/airport.csv", "../tests/routes.csv");
+    int dist = g.dijkstra("SFO", "AAN");
+    
+    REQUIRE(dist == 20179);
 }
 
 
